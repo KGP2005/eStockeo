@@ -1,6 +1,6 @@
 {
-    "name": "estockeo",
-    "short_name": "estockeo",
+    "name": "estockeo_p1",
+    "short_name": "estockeo_p1",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
