@@ -6,7 +6,7 @@ Primero asegúrate de estar en tu rama de trabajo:
 ```bash
 git checkout nombre-de-tu-rama
 ```
-Verifica en que ramma estás:
+Verifica en que rama estás:
 ```bash
 git branch
 ```
@@ -40,11 +40,6 @@ git push origin nombre-de-tu-rama
 Muévete a la rama main:
 ```bash
 git checkout main
-```
-Actualiza `main` con los últimos cambios del remoto:
-```bash
-
-git pull origin main
 ```
 Fusiona tu rama con `main`:
 ```bash
