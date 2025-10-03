@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'Screens/HomeExplorador.dart';
-import 'Screens/MensajesExplorador.dart';
-import 'Screens/PerfilExplorador.dart';
-import 'Screens/BolsaScreen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'Login/login_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://znxnjzqfkkmhkbxdplvj.supabase.co', 
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpueG5qenFma2ttaGtieGRwbHZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwMTgzNjQsImV4cCI6MjA3NDU5NDM2NH0.Yhd3GHyAK7JvQreMAm-YO6ZzbI5-vswL5wW6tLY09Dc', 
+  );
   runApp(const MyApp());
 }
 
@@ -14,60 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'eStockeo',
       debugShowCheckedModeBanner: false,
-      title: 'Estockeo',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
-        scaffoldBackgroundColor: Colors.white,
       ),
-      home: const MainNavigation(),
-    );
-  }
-}
-
-class MainNavigation extends StatefulWidget {
-  const MainNavigation({super.key});
-
-  @override
-  _MainNavigationState createState() => _MainNavigationState();
-}
-
-class _MainNavigationState extends State<MainNavigation> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _screens = [
-    HomeExplorador(), // Pantalla principal
-    BolsaScreen(), // Bolsa o carrito
-    MensajesExplorador(), // Mensajes
-    PerfilExplorador(), // Perfil
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.deepPurple,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
-            label: 'Bolsa',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Mensajes'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-        ],
-      ),
+      home: const LoginPage(),
     );
   }
 }
