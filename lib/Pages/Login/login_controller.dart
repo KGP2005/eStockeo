@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_service.dart';
-import '../Screens/Main_page.dart';
+import '../../Services/login_service.dart';
+import '../Home_Explorador/HomeExplorador_page.dart';
 
 class LoginController {
   final TextEditingController emailController = TextEditingController();
@@ -31,7 +31,6 @@ class LoginController {
       ),
     );
 
-<<<<<<< HEAD
     // Intentar login
     final result = await _loginService.login(email, password);
 
@@ -55,13 +54,6 @@ class LoginController {
           MaterialPageRoute(builder: (context) => HomeExplorador()),
         );
       }
-=======
-    if (success) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
->>>>>>> e30180711fa84085ae1242776fe10e8c50537d60
     } else {
       // Login fallido
       String errorMessage = 'Credenciales incorrectas';

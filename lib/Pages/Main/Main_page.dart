@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'HomeExplorador.dart';
-import 'BolsaScreen.dart';
-import 'PerfilExplorador.dart';
+import '../Home_Explorador/HomeExplorador_page.dart';
+import '../Carrito/carrito_page.dart';
+import '../PerfilExporador/PerfilExplorador_page.dart';
 class MainPage extends StatefulWidget {
   @override
   MainPageState createState() => MainPageState();
