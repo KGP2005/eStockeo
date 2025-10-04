@@ -41,6 +41,10 @@ Muévete a la rama main:
 ```bash
 git checkout main
 ```
+Actualiza `main` si no lo está:
+```bash
+git pull origin main
+```
 Fusiona tu rama con `main`:
 ```bash
 git merge nombre-de-tu-rama
