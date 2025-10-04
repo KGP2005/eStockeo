@@ -53,24 +53,31 @@ class BolsaScreen extends StatelessWidget {
             const Divider(),
             _buildSummary(),
             const SizedBox(height: 16),
+
+            // 🔹 Botón con fondo degradado
             SizedBox(
               width: double.infinity,
               height: 50,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      const LinearGradient(
-                            colors: [Color(0xFF6A5AE0), Color(0xFFB58DF1)],
-                          ).createShader(const Rect.fromLTWH(0, 0, 200, 70))
-                          as Color?, // workaround gradiente
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6A5AE0), Color(0xFFB58DF1)],
                   ),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                onPressed: () {},
-                child: const Text(
-                  "Confirmar",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    "Confirmar",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
                 ),
               ),
             ),

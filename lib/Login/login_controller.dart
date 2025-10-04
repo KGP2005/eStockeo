@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_service.dart';
-import '../Screens/HomeExplorador.dart';
+import '../Screens/Main_page.dart';
 
 class LoginController {
   final TextEditingController emailController = TextEditingController();
@@ -22,7 +22,7 @@ class LoginController {
     if (success) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeExplorador()),
+        MaterialPageRoute(builder: (context) => MainPage()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
