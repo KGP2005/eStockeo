@@ -12,20 +12,26 @@ class MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   int _bolsaCantidad = 0;
 
+  // 🔹 Lista de productos añadidos
+  List<Map<String, dynamic>> _productosBolsa = [];
+
+  // 🔹 Método para agregar productos
+  void _agregarABolsa(Map<String, dynamic> producto) {
+    setState(() {
+      _productosBolsa.add(producto);
+      _bolsaCantidad = _productosBolsa.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Aquí definimos las páginas y pasamos la función que actualiza el número de bolsa
     final List<Widget> _pages = [
       HomeExplorador(
-        onAddToBolsa: () {
-          setState(() {
-            _bolsaCantidad++;
-          });
-        },
+        onAddToBolsa: (producto) => _agregarABolsa(producto),
       ),
-      BolsaScreen(),
+      BolsaScreen(productos: _productosBolsa),
       const Center(child: Text("Mensajes", style: TextStyle(fontSize: 22))),
-      PerfilExplorador(),
+       PerfilExplorador(),
     ];
 
     return Scaffold(
@@ -47,23 +53,19 @@ class MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Stack(
-              clipBehavior: Clip.none,
               children: [
                 const Icon(Icons.shopping_bag),
                 if (_bolsaCantidad > 0)
                   Positioned(
-                    right: -6,
-                    top: -3,
+                    right: 0,
                     child: Container(
                       padding: const EdgeInsets.all(2),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.red,
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      constraints: const BoxConstraints(
-                        minWidth: 16,
-                        minHeight: 16,
-                      ),
+                      constraints:
+                          const BoxConstraints(minWidth: 16, minHeight: 16),
                       child: Text(
                         '$_bolsaCantidad',
                         style: const TextStyle(

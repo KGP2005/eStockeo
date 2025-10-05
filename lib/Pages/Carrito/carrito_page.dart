@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class BolsaScreen extends StatelessWidget {
-  const BolsaScreen({super.key});
+  final List<Map<String, dynamic>> productos;
+
+  const BolsaScreen({Key? key, required this.productos}) : super(key: key);
+
+  double get subtotal {
+    double s = 0.0;
+    for (final p in productos) {
+      final price = p['price'];
+      if (price is num) {
+        s += price.toDouble();
+      } else if (price is String) {
+        // intenta parsear cadenas como "S/ 39.99" o "39.99"
+        final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
+        s += double.tryParse(cleaned) ?? 0.0;
+      }
+    }
+    return s;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,37 +42,27 @@ class BolsaScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ListView(
-                children: [
-                  _buildCartItem(
-                    "Conjunto Deportivo",
-                    "S/ 39.99",
-                    "Talla: L  |  Color: Crema",
-                    "https://i.imgur.com/0y8Ftya.png",
-                    true,
-                  ),
-                  _buildCartItem(
-                    "Suéter de Cuello Alto",
-                    "S/ 39.99",
-                    "Talla: M  |  Color: Blanco",
-                    "https://i.imgur.com/0y8Ftya.png",
-                    false,
-                  ),
-                  _buildCartItem(
-                    "Camiseta de Algodón",
-                    "S/ 30.00",
-                    "Talla: L  |  Color: Negro",
-                    "https://i.imgur.com/0y8Ftya.png",
-                    true,
-                  ),
-                ],
-              ),
+              child: productos.isEmpty
+                  ? const Center(child: Text("La bolsa está vacía"))
+                  : ListView.builder(
+                      itemCount: productos.length,
+                      itemBuilder: (context, index) {
+                        final p = productos[index];
+                        return _buildCartItem(
+                          p['title'] ?? 'Sin título',
+                          'S/ ${p['price'].toString()}',
+                          p['brand'] ?? '',
+                          p['image'] ?? '',
+                          true,
+                        );
+                      },
+                    ),
             ),
             const Divider(),
             _buildSummary(),
             const SizedBox(height: 16),
 
-            // 🔹 Botón con fondo degradado
+            // Confirmar con fondo degradado (mantuve tu estilo)
             SizedBox(
               width: double.infinity,
               height: 50,
@@ -73,7 +81,9 @@ class BolsaScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   child: const Text(
                     "Confirmar",
                     style: TextStyle(fontSize: 18, color: Colors.white),
@@ -99,18 +109,20 @@ class BolsaScreen extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Colors.white,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 6,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
       child: ListTile(
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.network(imageUrl, width: 60, fit: BoxFit.cover),
+          child: imageUrl.isNotEmpty
+              ? Image.network(imageUrl, width: 60, fit: BoxFit.cover)
+              : Container(width: 60, height: 60, color: Colors.grey[200]),
         ),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Column(
@@ -126,6 +138,7 @@ class BolsaScreen extends StatelessWidget {
             Text(details, style: const TextStyle(fontSize: 12)),
           ],
         ),
+        // Si quieres luego editar cantidad por producto, reemplaza el trailing por controles dinámicos
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -139,13 +152,17 @@ class BolsaScreen extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.remove_circle_outline),
-                  onPressed: () {},
+                  onPressed: () {
+                    // Implementar disminución de cantidad por producto
+                  },
                   iconSize: 20,
                 ),
                 const Text("1"),
                 IconButton(
                   icon: const Icon(Icons.add_circle_outline),
-                  onPressed: () {},
+                  onPressed: () {
+                    // Implementar aumento de cantidad por producto
+                  },
                   iconSize: 20,
                 ),
               ],
@@ -158,11 +175,11 @@ class BolsaScreen extends StatelessWidget {
 
   Widget _buildSummary() {
     return Column(
-      children: const [
-        _SummaryRow(label: "Precio de productos", value: "S/110"),
-        _SummaryRow(label: "Envío", value: "Envío gratis"),
-        Divider(),
-        _SummaryRow(label: "Subtotal", value: "S/110", isBold: true),
+      children: [
+        _SummaryRow(label: "Precio de productos", value: "S/ ${subtotal.toStringAsFixed(2)}"),
+        const _SummaryRow(label: "Envío", value: "Envío gratis"),
+        const Divider(),
+        _SummaryRow(label: "Subtotal", value: "S/ ${subtotal.toStringAsFixed(2)}", isBold: true),
       ],
     );
   }
@@ -177,8 +194,8 @@ class _SummaryRow extends StatelessWidget {
     required this.label,
     required this.value,
     this.isBold = false,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

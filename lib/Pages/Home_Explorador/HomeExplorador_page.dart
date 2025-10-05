@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomeExplorador extends StatefulWidget {
-  final VoidCallback onAddToBolsa;
-
+  final void Function(Map<String, dynamic>) onAddToBolsa;
   const HomeExplorador({super.key, required this.onAddToBolsa});
+
 
   @override
   _HomeExploradorState createState() => _HomeExploradorState();
@@ -170,7 +170,12 @@ class _HomeExploradorState extends State<HomeExplorador> {
                           const SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
-                              widget.onAddToBolsa();
+                                  widget.onAddToBolsa({
+      "title": post["title"],
+      "price": post["price"],
+      "brand": post["brand"],
+      "image": post["image"],
+    });
                               setState(() {
                                 _mostrarCompra = false;
                               });
