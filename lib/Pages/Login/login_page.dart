@@ -1,3 +1,4 @@
+import 'package:estockeo_p1/Pages/Registro/registro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'login_controller.dart';
@@ -280,7 +281,12 @@ class _LoginPageState extends State<LoginPage> {
         ),
         TextButton(
           onPressed: () {
-            // TODO: Navegar a página de registro
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RegistroPage(),
+                ),
+            );
           },
           child: const Text(
             'Regístrate',

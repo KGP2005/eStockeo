@@ -13,23 +13,27 @@ class LoginController {
 
     // Validación
     if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Por favor ingresa tu correo y contraseña'),
-          backgroundColor: Colors.orange,
-        ),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Por favor ingresa tu correo y contraseña'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+      }
       return;
     }
 
     // Mostrar loading
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     // Intentar login
     final result = await _loginService.login(email, password);
