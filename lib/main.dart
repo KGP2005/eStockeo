@@ -1,4 +1,6 @@
 import 'package:estockeo_p1/Pages/Login/login_page.dart';
+import 'package:estockeo_p1/Pages/Registro/registro_page.dart';
+import 'package:estockeo_p1/Pages/Home_Explorador/HomeExplorador_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -24,6 +26,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       home: const LoginPage(),
+      routes: {
+        '/login': (context) => const LoginPage(),
+        '/registro': (context) => const RegistroPage(),
+        '/home_explorador': (context) => const HomeExplorador(),
+      },
     );
   }
 }

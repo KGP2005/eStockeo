@@ -28,3 +28,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/logo_registro.png
+    - assets/images/paso1.png
+    - assets/images/paso3.png

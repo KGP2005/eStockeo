@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'registro_controller.dart';
 import 'steps/paso1_correo.dart';
+import 'steps/paso2_correo.dart';
+import 'steps/paso3_correo.dart';
+import 'steps/paso4_correo.dart';
 
 class RegistroPage extends StatefulWidget {
   const RegistroPage({Key? key}) : super(key: key);
@@ -72,9 +75,9 @@ class _RegistroPageState extends State<RegistroPage> {
             return Text(
               'Paso ${_controller.pasoActual + 1}/4',
               style: const TextStyle(
-                color: Color(0xFF673AB7),
+                color: Color(0xFF5D4FB5),
                 fontSize: 14,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             );
           },
@@ -86,14 +89,9 @@ class _RegistroPageState extends State<RegistroPage> {
         physics: const NeverScrollableScrollPhysics(), // Deshabilitar swipe
         children: [
           Paso1Correo(controller: _controller),
-          // TODO: Agregar Paso2Datos(controller: _controller),
-          // TODO: Agregar Paso3Contrasena(controller: _controller),
-          // TODO: Agregar Paso4Politicas(controller: _controller),
-          
-          // Placeholders temporales para los otros pasos
-          Center(child: Text('Paso 2 - Próximamente')),
-          Center(child: Text('Paso 3 - Próximamente')),
-          Center(child: Text('Paso 4 - Próximamente')),
+          Paso2Datos(controller: _controller),
+          Paso3Contrasena(controller: _controller),
+          Paso4Politicas(controller: _controller),
         ],
       ),
     );
