@@ -358,7 +358,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Text(
             'O',
             style: GoogleFonts.poppins(
-              color: const Color(0xFF222222), // Color gris clarorgb(22, 22, 22)
+              color: const Color(0xFFEDECF3), // Color gris clarorgb(22, 22, 22)
               fontSize: 16,
             ),
           ),
