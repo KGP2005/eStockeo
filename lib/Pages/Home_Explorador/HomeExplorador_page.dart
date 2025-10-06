@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../componentes/nav_bar.dart';
 import '../Carrito/carrito_page.dart';
-import '../Carrito/carrito_controller.dart';
 import '../MensajesExplorador/MensajesExplorador_page.dart';
 import '../PerfilExporador/PerfilExplorador_page.dart';
 import 'home_explorador_controller.dart';
