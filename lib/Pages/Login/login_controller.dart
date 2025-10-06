@@ -49,9 +49,12 @@ class LoginController {
           ),
         );
         
+        // Navegación limpia sin parámetros innecesarios
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeExplorador(onAddToBolsa: (_) {})),
+          MaterialPageRoute(
+            builder: (context) => const HomeExplorador(),
+          ),
         );
       }
     } else {
