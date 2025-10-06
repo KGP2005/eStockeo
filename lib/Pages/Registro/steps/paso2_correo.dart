@@ -54,14 +54,19 @@ class Paso2Datos extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: _buildDropdown(
-                    value: controller.genero.isEmpty ? null : controller.genero,
-                    hintText: 'Género',
-                    items: ['Masculino', 'Femenino', 'Otro'],
-                    onChanged: (value) {
-                      if (value != null) {
-                        controller.setGenero(value);
-                      }
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, _) {
+                      return _buildDropdown(
+                        value: controller.genero.isEmpty ? null : controller.genero,
+                        hintText: 'Género',
+                        items: ['Masculino', 'Femenino', 'Otro'],
+                        onChanged: (value) {
+                          if (value != null) {
+                            controller.setGenero(value);
+                          }
+                        },
+                      );
                     },
                   ),
                 ),
@@ -74,27 +79,37 @@ class Paso2Datos extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _buildDropdown(
-                    value: controller.pais.isEmpty ? null : controller.pais,
-                    hintText: 'País',
-                    items: ['Perú', 'Argentina', 'Chile', 'Colombia'],
-                    onChanged: (value) {
-                      if (value != null) {
-                        controller.setPais(value);
-                      }
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, _) {
+                      return _buildDropdown(
+                        value: controller.pais.isEmpty ? null : controller.pais,
+                        hintText: 'País',
+                        items: ['Perú', 'Argentina', 'Chile', 'Colombia'],
+                        onChanged: (value) {
+                          if (value != null) {
+                            controller.setPais(value);
+                          }
+                        },
+                      );
                     },
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: _buildDropdown(
-                    value: controller.departamento.isEmpty ? null : controller.departamento,
-                    hintText: 'Departamento',
-                    items: ['Lima', 'Arequipa', 'Cusco', 'La Libertad'],
-                    onChanged: (value) {
-                      if (value != null) {
-                        controller.setDepartamento(value);
-                      }
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, _) {
+                      return _buildDropdown(
+                        value: controller.departamento.isEmpty ? null : controller.departamento,
+                        hintText: 'Departamento',
+                        items: ['Lima', 'Arequipa', 'Cusco', 'La Libertad'],
+                        onChanged: (value) {
+                          if (value != null) {
+                            controller.setDepartamento(value);
+                          }
+                        },
+                      );
                     },
                   ),
                 ),
@@ -107,27 +122,37 @@ class Paso2Datos extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _buildDropdown(
-                    value: controller.provincia.isEmpty ? null : controller.provincia,
-                    hintText: 'Provincia',
-                    items: ['Lima', 'Callao', 'Huaral', 'Cañete'],
-                    onChanged: (value) {
-                      if (value != null) {
-                        controller.setProvincia(value);
-                      }
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, _) {
+                      return _buildDropdown(
+                        value: controller.provincia.isEmpty ? null : controller.provincia,
+                        hintText: 'Provincia',
+                        items: ['Lima', 'Callao', 'Huaral', 'Cañete'],
+                        onChanged: (value) {
+                          if (value != null) {
+                            controller.setProvincia(value);
+                          }
+                        },
+                      );
                     },
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: _buildDropdown(
-                    value: controller.distrito.isEmpty ? null : controller.distrito,
-                    hintText: 'Distrito',
-                    items: ['Miraflores', 'San Isidro', 'Surco', 'La Molina'],
-                    onChanged: (value) {
-                      if (value != null) {
-                        controller.setDistrito(value);
-                      }
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, _) {
+                      return _buildDropdown(
+                        value: controller.distrito.isEmpty ? null : controller.distrito,
+                        hintText: 'Distrito',
+                        items: ['Miraflores', 'San Isidro', 'Surco', 'La Molina'],
+                        onChanged: (value) {
+                          if (value != null) {
+                            controller.setDistrito(value);
+                          }
+                        },
+                      );
                     },
                   ),
                 ),

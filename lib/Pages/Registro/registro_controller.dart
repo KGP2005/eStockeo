@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../Services/Registro/registro_service.dart';
 
 class RegistroController extends ChangeNotifier {
   // Paso actual (0-3 para los 4 pasos)
@@ -37,7 +38,15 @@ class RegistroController extends ChangeNotifier {
   bool get correoValido {
     final correo = correoController.text.trim();
     if (correo.isEmpty) return false;
-    return RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$').hasMatch(correo);
+    
+    // Validación más estricta del email
+    // Debe tener al menos 3 caracteres antes del @
+    // Dominio válido con al menos 2 caracteres antes del punto
+    final regex = RegExp(
+      r'^[a-zA-Z0-9][\w\.-]{2,}@[a-zA-Z0-9][\w\.-]+\.[a-zA-Z]{2,}$'
+    );
+    
+    return regex.hasMatch(correo);
   }
 
   bool get correosCoincidenYValidos {
@@ -177,10 +186,28 @@ class RegistroController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Registrar usuario (implementar después)
-  Future<bool> registrarUsuario() async {
-    // TODO: Implementar con Supabase
-    return false;
+  // Registrar usuario en Supabase y guardar datos en la tabla 'usuarios'.
+  Future<String?> registrarUsuario() async {
+    final service = RegistroService();
+    final email = correoController.text.trim();
+    final password = contrasenaController.text;
+    final datos = {
+      'name': nombreCompletoController.text.trim(), // Cambiado de 'nombre_completo' a 'name'
+      'fecha_nacimiento': fechaNacimientoController.text.trim(),
+      'genero': genero,
+      'pais': pais,
+      'departamento': departamento,
+      'provincia': provincia,
+      'distrito': distrito,
+      'celular': celularController.text.trim(),
+      'direccion': direccionController.text.trim(),
+      'username': usernameController.text.trim(),
+    };
+    return await service.registrarUsuario(
+      email: email,
+      password: password,
+      datos: datos,
+    );
   }
 
   @override

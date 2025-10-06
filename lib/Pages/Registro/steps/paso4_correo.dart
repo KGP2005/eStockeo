@@ -268,7 +268,7 @@ class Paso4Politicas extends StatelessWidget {
       Navigator.pop(context);
     }
 
-    if (resultado) {
+    if (resultado == null) {
       // Registro exitoso - navegar a Home Explorador
       if (context.mounted) {
         Navigator.pushReplacementNamed(context, '/home_explorador');
@@ -277,8 +277,8 @@ class Paso4Politicas extends StatelessWidget {
       // Error en el registro
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error al crear la cuenta. Por favor intenta de nuevo.'),
+          SnackBar(
+            content: Text(resultado),
             backgroundColor: Colors.red,
           ),
         );
