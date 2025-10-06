@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../Services/login_service.dart';
 import '../Home_Explorador/HomeExplorador_page.dart';
-import '../Main/Main_page.dart';
 
 class LoginController {
   final TextEditingController emailController = TextEditingController();
@@ -52,7 +51,7 @@ class LoginController {
         
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MainPage()),
+          MaterialPageRoute(builder: (context) => HomeExplorador(onAddToBolsa: (_) {})),
         );
       }
     } else {
