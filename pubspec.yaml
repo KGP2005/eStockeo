@@ -30,3 +30,5 @@ flutter:
     - assets/images/logo_registro.png
     - assets/images/paso1.png
     - assets/images/paso3.png
+    - assets/icons/
+    - assets/icons_interaction/
