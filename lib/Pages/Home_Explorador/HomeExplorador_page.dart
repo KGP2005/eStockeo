@@ -4,7 +4,8 @@ import '../Carrito/carrito_page.dart';
 import '../MensajesExplorador/MensajesExplorador_page.dart';
 import '../PerfilExporador/PerfilExplorador_page.dart';
 import 'home_explorador_controller.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import '../../componentes/interaction_icons.dart';
 class HomeExplorador extends StatefulWidget {
   const HomeExplorador({Key? key}) : super(key: key);
 
@@ -175,60 +176,89 @@ class _HomeExploradorState extends State<HomeExplorador> {
             children: [
               Text(
                 post["title"],
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black54,
-                      offset: Offset(1, 1),
-                      blurRadius: 3,
-                    ),
-                  ],
-                ),
+                style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
               ),
               const SizedBox(height: 6),
-              Text(
-                post["brand"],
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black54,
-                      offset: Offset(1, 1),
-                      blurRadius: 3,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.shopping_bag, color: Colors.white),
-                label: const Text(
-                  "Comprar",
-                  style: TextStyle(
+                Row(
+              children: [
+                // Logo circular con iniciales
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
                     color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Center(
+                    child: Text(
+                      post["brand"].substring(0, 2).toUpperCase(), // Toma las 2 primeras letras (ej: AR)
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Nombre de la marca
+                Text(
+                  post["brand"],
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
+              ],
+            ),              
+              const SizedBox(height: 12),
+              Text(
+                '128 unidades disponibles',
+              style: GoogleFonts.poppins(
+                color: Colors.white70,
+                fontSize: 14,
+              ),
+            ),
+              const SizedBox(height: 16),
+              Container(
+                width: double.infinity,
+                height: 48,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6E44FF), Color(0xFF9C88FF)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {_mostrarCompra = true;
+                  });},
+                  icon: const Icon(Icons.shopping_bag_outlined,
+                      color: Colors.white,
+                      size: 20,),
+                  label: Text(
+                    "Comprar",
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent, 
+                    shadowColor: Colors.transparent,      
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
                   ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _mostrarCompra = true;
-                  });
-                },
               ),
             ],
           ),
@@ -239,40 +269,58 @@ class _HomeExploradorState extends State<HomeExplorador> {
           right: 16,
           bottom: 100,
           child: Column(
-            children: [
-              _buildInteractionButton(
-                Icons.favorite_border,
-                "${post["likes"]}",
-                () {
-                  // TODO: Implementar like
-                  print("Like presionado");
-                },
-              ),
-              const SizedBox(height: 20),
-              _buildInteractionButton(
-                Icons.comment,
-                "${post["comments"]}",
-                () {
-                  // TODO: Implementar comentarios
-                  print("Comentarios presionado");
-                },
-              ),
-              const SizedBox(height: 20),
-              _buildInteractionButton(
-                Icons.share,
-                "${post["shares"]}",
-                () {
-                  // TODO: Implementar compartir
-                  print("Compartir presionado");
-                },
-              ),
-            ],
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _IconCounter(
+            iconPath: 'assets/icons/heart white.png',
+            count: 4345,
+          ),
+          const SizedBox(height: 20),
+          _IconCounter(
+            iconPath: 'assets/icons/reseñas.png',
+            count: 10,
+          ),
+          const SizedBox(height: 20),
+          _IconCounter(
+            iconPath: 'assets/icons/etiqueta.png',
+            count: 1533,
+          ),
+          const SizedBox(height: 20),
+          _IconCounter(
+            iconPath: 'assets/icons/compartir.png',
+            count: 520,
+          ),
+        ],
+      ),
+        ),
+      ],
+    );
+  }
+  Widget _IconCounter({
+    required String iconPath,
+    required int count,
+  }) {
+    return Column(
+      children: [
+        Image.asset(
+          iconPath,
+          width: 28,
+          height: 28,
+          fit: BoxFit.contain,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          count.toString(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ],
     );
   }
-
   Widget _buildInteractionButton(
     IconData icon,
     String count,

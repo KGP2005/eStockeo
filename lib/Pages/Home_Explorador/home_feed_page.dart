@@ -62,7 +62,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
           children: [
             // Título del producto
             Text(
-              'Blusa de lino oversize',
+              'Blusa de li',
               style: GoogleFonts.poppins(
                 color: Colors.white,
                 fontSize: 24,
