@@ -5,7 +5,6 @@ import '../MensajesExplorador/MensajesExplorador_page.dart';
 import '../PerfilExporador/PerfilExplorador_page.dart';
 import 'home_explorador_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../componentes/interaction_icons.dart';
 class HomeExplorador extends StatefulWidget {
   const HomeExplorador({Key? key}) : super(key: key);
 
