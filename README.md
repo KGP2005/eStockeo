@@ -26,8 +26,8 @@ git commit -m "Descripción breve de los cambios realizados"
 ```
 En caso de no poder realizar el commit por ser la primera vez, ejecutar los siguientes códigos y volver a intentar el punto `3`
 ```bash
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
+git config --global user.email ""
+git config --global user.name ""
 ```  
 - Reemplazar `you@example.com` y `Your Name` por tu correo y nombre respectivamente.
 ## 4. Subir tus cambios a tu rama en GitHub
